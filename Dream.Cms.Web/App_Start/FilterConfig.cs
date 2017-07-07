@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Dream.Cms.Web
@@ -7,7 +8,16 @@ namespace Dream.Cms.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new CustomHandleErrorAttribute());
+        }
+    }
+
+    public class CustomHandleErrorAttribute : HandleErrorAttribute
+    {
+        public override void OnException(ExceptionContext filterContext)
+        {
+            File.AppendAllText(filterContext.HttpContext.Server.MapPath("/log.txt"), filterContext.Exception.Message);
+            base.OnException(filterContext);
         }
     }
 }

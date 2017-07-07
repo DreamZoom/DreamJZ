@@ -1,0 +1,73 @@
+﻿@model object
+<style>
+    .sku-attr{
+
+    }
+
+    .sku-attr-title{
+        font-weight:bold;
+        font-size:20px;
+        border-bottom:solid 1px #ddd;
+    }
+    .sku-attr-value-list::after{
+        content:" ";
+        display:block;
+        clear:both;
+    } 
+    .sku-attr-value {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        border: #ddd 1px solid;
+        display: block;
+        float: left;
+    }
+    .sku-attr-value.selected{
+        background-color:#0094ff;
+    }
+</style>
+<div ng-app="SkuEditor_@Html.ViewData.ModelMetadata.PropertyName" ng-controller="skuEditorController">
+    <div ng-repeat="attr in skuAttributes">
+        <div class="sku-attr-title">{{attr.name}}</div>
+        <div class="sku-attr-value-list">
+            <span class="sku-attr-value" ng-class="{'selected':attrValue.selected}" ng-repeat="attrValue in attr.values" ng-click="toggleSelected(attrValue)">
+                {{attrValue.name}}
+            </span>
+        </div>
+    </div>
+
+    <div class="sku-list">
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="~/Theme/angular.min.js"></script>
+<script type="text/javascript">
+    (function () {
+        var app = angular.module("SkuEditor_@Html.ViewData.ModelMetadata.PropertyName", []);
+
+        app.controller('skuEditorController', function ($scope) {
+            var skuAttributes;
+            $scope.skuAttributes = skuAttributes = [];
+            skuAttributes.push({
+                name: "color",
+                values: [{ name: "red", selected: true }, { name: "blue", selected: true }, { name: "yellow", selected: true }]
+            });
+            skuAttributes.push({
+                name: "尺寸",
+                values: [{ name: "大号", selected: true }, { name: "小号", selected: true }]
+            });
+
+            $scope.toggleSelected=function(o){
+                o.selected = !o.selected;
+            }
+
+        });
+
+    })();
+</script>

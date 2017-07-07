@@ -1,0 +1,39 @@
+﻿<input type="hidden" name="@Html.ViewData.ModelMetadata.PropertyName" id="@Html.ViewData.ModelMetadata.PropertyName" value="@Model" />
+
+<div class="file_container" id="file_container_@Html.ViewData.ModelMetadata.PropertyName">
+    <!--头部，相册选择和格式选择-->
+    
+</div>
+
+<button class="btn green" id="upload_@Html.ViewData.ModelMetadata.PropertyName">上传图片</button>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+
+        $("#upload_@Html.ViewData.ModelMetadata.PropertyName").uploadify({
+            multi: false,
+            buttonText: "选择图片",
+            fileTypeDesc: '图片文件',
+            fileTypeExts: '*.jpg; *.png; *.bmp',
+            swf: '/Themes/metronic/global/plugins/uploadify/uploadify.swf',
+            uploader: '/ashx/upload_json.ashx?dir=image',
+            onSelect: function () {
+               
+            },
+            onUploadSuccess: function (file, data, response) {
+                console.log(file);
+                console.log(data);
+                console.log(response);
+                data = JSON.parse(data);
+                $("#@Html.ViewData.ModelMetadata.PropertyName").val(data.url);
+                $("#file_container_@Html.ViewData.ModelMetadata.PropertyName").append("<img src='" + data.url + "' class='thumb' />");
+            }
+        });
+
+    });
+
+
+</script>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Theme/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Theme/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Theme/css/admin.css" rel="stylesheet" />
+    <script src="~/Theme/jquery-3.0.0.js"></script>
+    @*<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>*@
+    <script src="~/Theme/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
+    <link href="~/Theme/kindeditor/themes/simple/simple.css" rel="stylesheet" />
+    <script src="~/Theme/kindeditor/kindeditor-all.js"></script>
+
+    <link href="~/Theme/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />   
+    <script src="~/Theme/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/Theme/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <link href="~/Theme/plugins/uploadify/uploadify.css" rel="stylesheet" />
+    <script src="~/Theme/plugins/uploadify/jquery.uploadify.js"></script>
+    
+    <link href="~/Theme/jquery-ui-1.12.0/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Theme/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+    
+    <link href="~/Theme/webuploader-0.1.5/webuploader.css" rel="stylesheet" />
+    <script src="~/Theme/webuploader-0.1.5/webuploader.js"></script>
+
+    <script src="~/Theme/angular.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-ligting navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fa fa-coffee" aria-hidden="true"></i></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="#">管理控制台</a></li>
+                </ul>
+                @*<ul class="nav navbar-nav">
+                        <li class="active"><a href="@Url.Action("list","Article")">文章管理</a></li>
+                        <li><a href="@Url.Action("list","Category")">类别管理</a></li>
+                        <li><a href="#">友情链接</a></li>
+                    </ul>*@
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">退出 <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    @*@if (Html.Manager().CheckLogin())
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Html.Manager().GetUserName() <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("修改密码", "ChangePassword", "Manage")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("注销", "Logout", "Manage")</li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                             <li>@Html.ActionLink("登录", "Login", "Manage")</li>
+                        }*@
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="page-sidebar">
+        @Html.Partial("SliderMenu");
+    </div>
+    <div class="page-container container">
+        <div style="background-color:#eee;padding:10px;margin-bottom:20px;">
+            @{
+                var breadcrumbs = Html.Breadcrumbs();
+            }
+            <span class="fa fa-home"></span>  
+            @foreach(var item in breadcrumbs){
+               <span> > </span><span class="">@item.Name</span>
+            }
+        </div>
+        @RenderBody()
+    </div>
+</body>
+</html>

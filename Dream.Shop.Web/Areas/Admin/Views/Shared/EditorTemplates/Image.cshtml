@@ -1,0 +1,69 @@
+﻿
+<style type="text/css">
+    .img-preview {
+        width: 200px;
+        min-height: 200px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<input type="hidden" name="@Html.ViewData.ModelMetadata.PropertyName" id="@Html.ViewData.ModelMetadata.PropertyName" value="@Model" />
+<div id="file_container_@Html.ViewData.ModelMetadata.PropertyName">
+    <img src="@Model" alt="" id="image_@Html.ViewData.ModelMetadata.PropertyName" class="img-preview" />
+</div>
+<span  id="picker_@Html.ViewData.ModelMetadata.PropertyName" />
+<script type="text/javascript">
+    $(function () {
+
+        var imgSrc = $("#@Html.ViewData.ModelMetadata.PropertyName").val();
+
+        if (imgSrc) {
+            $("#image_@Html.ViewData.ModelMetadata.PropertyName").attr("src", imgSrc);
+        }
+
+        var uploader = WebUploader.create({
+            pick: {
+                id: '#picker_@Html.ViewData.ModelMetadata.PropertyName',
+                label: '点击选择图片'
+            },
+            formData: {
+                uid: 123
+            },
+            dnd: '#file_container_@Html.ViewData.ModelMetadata.PropertyName',
+            paste: '#file_container_@Html.ViewData.ModelMetadata.PropertyName',
+            swf: '/Theme/webuploader-0.1.5/Uploader.swf',
+            chunked: false,
+            chunkSize: 512 * 1024,
+            server: '/ashx/upload_json.ashx',
+            // runtimeOrder: 'flash',
+            accept: {
+                title: '选择图片',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            },
+
+            // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
+            disableGlobalDnd: true,
+            fileNumLimit: 300,
+            fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+            fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+        });
+
+        uploader.on('fileQueued', function (file) {
+            uploader.upload();
+        });
+        uploader.on('filesQueued', function (file) {
+            uploader.upload();
+        });
+
+        uploader.on('uploadSuccess', function (file, response) {
+            $("#@Html.ViewData.ModelMetadata.PropertyName").val(response.url);
+            $("#image_@Html.ViewData.ModelMetadata.PropertyName").attr("src", response.url);
+           
+        });
+
+
+        
+
+    });
+</script>

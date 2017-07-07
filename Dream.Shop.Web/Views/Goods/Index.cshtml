@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        var app = angular.module('dataApp', []);
+        app.controller('list', function ($scope, $http) {
+            $http.get("/goods/PageList")
+            .success(function (response) {
+                //$scope.names = response.sites;
+                console.log(response);
+            });
+        });
+    </script>
+}
+
+<div class="" ng-app="dataApp">
+
+    <div ng-controller="list">
+
+    </div>
+
+</div>
+
+
+
+{name:"江西"	    ,times:197	,value:28.59},
+{name:"广东"	    ,times:117	,value:16.98},
+{name:"上海"	    ,times:38	,value:5.52 },
+{name:"北京"	    ,times:33	,value:4.79 },
+{name:"湖北"	    ,times:33	,value:4.79 },
+{name:"福建"	    ,times:30	,value:4.35 },
+{name:"广西"	    ,times:28	,value:4.06 },
+{name:"美国"	    ,times:28	,value:4.06 },
+{name:"浙江"	    ,times:21	,value:3.05 },
+{name:"江苏"	    ,times:21	,value:3.05 },
+{name:"辽宁"	    ,times:18	,value:2.61 },
+{name:"安徽"	    ,times:11	,value:1.6  },
+{name:"山东"	    ,times:10	,value:1.45 },
+{name:"天津"	    ,times:9	,value:1.31 },
+{name:"河北"	    ,times:9	,value:1.31 },
+{name:"新疆"	    ,times:9	,value:1.31 },
+{name:"贵州"	    ,times:8	,value:1.16 },
+{name:"重庆"	    ,times:8	,value:1.16 },
+{name:"四川"	    ,times:8	,value:1.16 },
+{name:"河南"	    ,times:9	,value:1.31 },
+{name:"台湾"	    ,times:8	,value:1.16 },
+{name:"吉林"	    ,times:7	,value:1.02 },
+{name:"湖南"	    ,times:6	,value:0.87 },
+{name:"香港"	    ,times:4	,value:0.58 },
+{name:"海南"	    ,times:4	,value:0.58 },
+{name:"黑龙江"	    ,times:3	,value:0.44     },
+{name:"内蒙古"	    ,times:3	,value:0.44     },
+{name:"陕西"	    ,times:3	,value:0.44 },
+{name:"甘肃"	    ,times:3	,value:0.44 },
+{name:"山西"	    ,times:1	,value:0.15 },
+{name:"南京"	    ,times:1	,value:0.15 },
+{name:"云南"	    ,times:1	,value:0.15 },

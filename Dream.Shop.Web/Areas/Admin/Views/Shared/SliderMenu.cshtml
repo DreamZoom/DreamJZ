@@ -1,0 +1,44 @@
+﻿@{
+    var menus = Html.MenuConfig();
+}
+@helper ShowMenu(List<Dream.Config.MenuNode> list)
+{
+    foreach (var item in list)
+    {
+        if (!item.Group)
+        {
+            <li role="presentation" class="active"><a href="@Url.Action(item.ActionName,item.ControllerName,item.getParams())" class="side-menu-item"><i class="fa fa-bars" ></i> @item.Name</a></li>
+        }
+        else
+        {
+            <li class="sub-nav">
+                <a class="side-menu-item "  href="#" role="button">
+                    <i class="fa fa-ellipsis-v"></i>  @item.Name 
+                </a>
+                <ul class="side-sub-menu">
+                    @ShowMenu(item.Menus)
+                </ul>
+            </li>
+        }
+
+    }
+}
+
+<div class="side-nav">
+    <ul>
+        @ShowMenu(menus.Menus)
+    </ul>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+ 
+
+        $(".sub-nav > .side-sub-menu").hide();
+        $(".sub-nav > .side-menu-item").bind("click", function () {
+            $(this).parent().siblings().removeClass("open").children(".side-sub-menu").slideUp(200);
+            $(this).parent().addClass("open").children(".side-sub-menu").slideToggle(200);
+        })
+    })
+</script>

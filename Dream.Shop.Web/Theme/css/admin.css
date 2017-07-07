@@ -1,0 +1,133 @@
+﻿body {
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";
+}
+
+.navbar-ligting{
+    background-color:#09c;
+    border-color: #09c;
+    color:white;
+}
+.navbar-ligting .nav a ,.navbar-ligting .navbar-header i{
+    color:white;
+}
+
+.navbar-fixed-top + .container {
+    margin-top: 60px;
+}
+
+.nav a {
+    transition: all 200ms;
+    border-left: solid 1px #08c;
+}
+
+    .nav a:hover {
+        background-color: #08c !important;
+    }
+
+.login-form, .change-password-from {
+    padding: 20px;
+    margin: auto;
+}
+
+.page-sidebar {
+    width: 180px;
+    position: fixed;
+    top: 50px;
+    bottom: 0px;
+    background-color: #293038;
+    z-index: 102;
+    overflow-x: hidden;
+    overflow: hidden;
+}
+
+.page-container {
+    margin-top: 60px;
+    margin-left: 180px;
+}
+
+.side-nav ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    overflow: hidden;
+}
+
+.side-nav .fa {
+    color: #9d9d9d;
+}
+
+.side-nav ul li, .side-nav ul li a, .side-nav ul li a:hover, .side-nav ul li a:visited {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.side-menu-item:hover {
+    background-color: #2d3945;
+}
+
+.side-menu-item {
+    padding-left: 10px;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-overflow: ellipsis;
+    border-bottom: solid 1px #404040;
+}
+
+.side-sub-menu > li > .side-menu-item {
+    padding-left: 30px;
+}
+
+.side-sub-menu {
+    background-color: #474747;
+}
+
+.file_container {
+    min-height: 80px;
+    margin-bottom: 10px;
+}
+
+    .file_container .file-item {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+        margin-bottom:10px;
+        float: left;
+    }
+    .file_container::after{
+        content:" ";
+        clear:both;
+        display:block;
+    }
+
+    .file_container .file-item {
+        position: relative;
+    }
+
+        .file_container .file-item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .file_container .file-item .file-tools {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #888;
+            color: #ddd;
+            display: none;
+            text-align: right;
+            padding-right: 5px;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            -khtml-opacity: 0.8;
+            opacity: 0.8;
+        }
+
+        .file_container .file-item:hover .file-tools {
+            display: block;
+        }
+
+        .file_container .file-item .file-tools span:hover {
+            color: #fff;
+        }

@@ -1,0 +1,108 @@
+﻿<input type="hidden" name="@Html.ViewData.ModelMetadata.PropertyName" id="@Html.ViewData.ModelMetadata.PropertyName" value="@Model" />
+
+<!--头部，相册选择和格式选择-->
+<div class="file_container" id="file_container_@Html.ViewData.ModelMetadata.PropertyName">
+
+</div>
+<span id="picker_@Html.ViewData.ModelMetadata.PropertyName">选择图片</span>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var uploader = WebUploader.create({
+            pick: {
+                id: '#picker_@Html.ViewData.ModelMetadata.PropertyName',
+                label: '点击选择图片(多选)'
+            },
+            formData: {
+                uid: 123
+            },
+            dnd: '#file_container_@Html.ViewData.ModelMetadata.PropertyName',
+            paste: '#file_container_@Html.ViewData.ModelMetadata.PropertyName',
+            swf: '/Theme/webuploader-0.1.5/Uploader.swf',
+            chunked: false,
+            chunkSize: 512 * 1024,
+            server: '/ashx/upload_json.ashx',
+            // runtimeOrder: 'flash',
+            accept: {
+                title: '选择图片',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            },
+
+            // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
+            disableGlobalDnd: true,
+            fileNumLimit: 300,
+            fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+            fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+        });
+
+        uploader.on('fileQueued', function (file) {
+            uploader.upload();
+        });
+        uploader.on('filesQueued', function (file) {
+            uploader.upload();
+        });
+
+        uploader.on('uploadSuccess', function (file, response) {
+
+            addFile(response.url);
+        });
+
+
+        function updateValue() {
+            
+            var images = [];
+            $("#file_container_@Html.ViewData.ModelMetadata.PropertyName").find(".file-item")
+                .each(function (index, element) {
+                    var image_src = $(element).find("img").attr("src");
+                    if (image_src) {
+                        images.push(image_src);
+                    }
+                });
+
+            $("#@Html.ViewData.ModelMetadata.PropertyName").val(images.join(','));
+
+        }
+
+        function addFile(url) {
+            var img = new Image();
+            img.src = url;
+            $('<div class="file-item"></div>')
+                .appendTo("#file_container_@Html.ViewData.ModelMetadata.PropertyName")
+            .append(img)
+            .append('<div class="file-tools"><span class="fa fa-close delete"></span></div>');
+
+            updateValue();
+        }
+        function Init() {
+
+            var images = $("#@Html.ViewData.ModelMetadata.PropertyName").val().split(',');
+            for (var i = 0; i < images.length; i++) {
+                if (images[i]) {
+                    addFile(images[i]);
+                }
+            }
+        }
+        Init();
+        $("#file_container_@Html.ViewData.ModelMetadata.PropertyName").sortable({
+            update: function () {
+                updateValue();
+            }
+        });
+        $("#file_container_@Html.ViewData.ModelMetadata.PropertyName").disableSelection();
+        $("#file_container_@Html.ViewData.ModelMetadata.PropertyName")
+            .on("click", ".file-item", function (e) {
+                if ($(e.target).hasClass("delete")) {
+                    console.log("remove");
+                    $(this).remove();
+                    updateValue();
+                }
+            })
+
+    });
+
+
+</script>

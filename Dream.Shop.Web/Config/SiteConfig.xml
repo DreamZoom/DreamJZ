@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<SiteConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SiteName>文章管理系统</SiteName>
+  <SiteDiscription>&lt;img src="/upload/image/20160524/20160524220019_9432.png" alt="" /&gt;11</SiteDiscription>
+  <SiteKeywords>cms</SiteKeywords>
+  <CopyRight>copyright dream.com</CopyRight>
+</SiteConfig>
