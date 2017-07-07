@@ -1,0 +1,49 @@
+﻿<input type="hidden" name="@Html.ViewData.ModelMetadata.PropertyName" id="@Html.ViewData.ModelMetadata.PropertyName" value="@Model" />
+
+<div class="easyui-panel" style="padding:5px;height:300px;">
+    <ul id="tree_@Html.ViewData.ModelMetadata.PropertyName"></ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#tree_@Html.ViewData.ModelMetadata.PropertyName").tree({
+            url: "@Url.Action("getAuths", "Role")",
+            checkbox: true,
+            onCheck: function () {
+                var list = new Array();
+                var nodes = $(this).tree("getChecked");
+
+                for (var i = 0; i < nodes.length; i++) {
+                    list.push(nodes[i].id);
+                }
+
+                $("#@Html.ViewData.ModelMetadata.PropertyName").val(list.join(','));
+
+            },
+            onLoadSuccess: function () {
+                var value = $("#@Html.ViewData.ModelMetadata.PropertyName").val();
+                var valueList = value.split(',');
+
+                for (var i = 0; i < valueList.length; i++) {
+                    var val = valueList[i];
+                    if (val) {
+                        var node = $(this).tree('find', val);
+                        $(this).tree('check', node.target);
+                    }
+                    
+                }
+
+                //禁止勾选欢迎使用
+                var node = $(this).tree('find', "欢迎使用");
+                if (node) {
+                    $(this).tree('check', node.target);
+                    $("#" + node.domId).find('span.tree-checkbox').unbind().click(function () {
+                        return false;
+                    });
+                    $("#" + node.domId).find('span.tree-title').css("color", "#888");
+                }
+                
+            }
+
+        });
+    });
+</script>

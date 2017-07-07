@@ -1,0 +1,41 @@
+﻿@model Dream.EntityBase
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Frame.cshtml";
+
+    var propertys = Html.Metadata();
+}
+@if (ViewBag.IsDelete)
+{
+     <div class="alert alert-danger">
+        您确定要删除此项么？
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @foreach (var property in propertys)
+        {
+            @Html.Hidden(property.PropertyName)
+            <div class="form-group">
+                <label for="@property.PropertyName" class="col-sm-2 control-label">@property.DisplayName</label>
+                <div class="col-sm-10">
+                    @Html.Display(property.PropertyName)
+                </div>
+            </div>
+        }
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                @if (ViewBag.IsDelete)
+                {
+                    <button type="submit" class="btn btn-primary">删除</button>
+                }
+                
+                <a href="@Request.UrlReferrer" class="btn btn-default">返回</a>
+            </div>
+        </div>
+    </div>
+}

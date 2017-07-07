@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "列表";
+    Layout = "~/Areas/Admin/Views/Shared/FrameLayout.cshtml";
+    var propertys = Html.Metadata();
+    List<string> fields = new List<string>();
+    foreach (var property in propertys)
+    {
+        if (property.ListMode == Dream.ShowMode.Hidden || property.ListMode == Dream.ShowMode.Hidden) { continue; }
+        fields.Add("{" + string.Format("field:\"{0}\", title:\"{1}\"", property.PropertyName, property.DisplayName) + "}");
+
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#table_list').datagrid({
+            url: '@Url.Action("PageList")',
+            pagination: true,
+            columns: [[
+                { field: 'checked', checkbox: true },
+                @Html.Raw(string.Join(",",fields)),
+                {
+                    field: 'count',
+                    title: "报名记录",
+                    formatter: function (value, row, index) {
+                        (function (value, row, index) {
+                            $.ajax({
+                                url: "@Url.Action("getRecordCountByUser", "JobRecord")?userid=" + row.ID,
+                                dataType:"json",
+                                success: function (data) {
+                                    if (data.result) {
+                                        setTimeout(function () {
+                                            $("#user_count_" + row.ID).html(data.count);
+                                            console.log("#user_count_" + row.ID + ":" + data.count);
+                                        },500)
+                                        
+                                    }
+                                }
+                            })
+
+                        })(value, row, index);
+                        return "<span id='user_count_" + row.ID + "'></span>";
+                    }
+                
+                },
+                {
+                    field: "action",
+                    title: "操作",
+                    formatter: function (value, row, index) {
+                        return '<a href="@Url.Action("List", "JobRecord")?userid=' + row.ID + '">查看报名记录</a>';
+                    }
+                }
+            ]],
+            toolbar: [{
+                iconCls: 'icon-add',
+                text: "添加",
+                handler: function () {
+                    window.location.href = "@Url.Action("Create")";
+                }
+            }, '-', {
+                iconCls: 'icon-edit',
+                text: "编辑",
+                handler: function () {
+                    var row = $('#table_list').datagrid("getSelected");
+                    if (row) {
+                        window.location.href = "@Url.Action("Edit")?id=" + row.ID;
+                    }
+                    else {
+                        alert("请选择数据");
+                    }
+                }
+            }, '-', {
+                iconCls: 'icon-remove',
+                text: "删除",
+                handler: function () {
+                    var rows = $('#table_list').datagrid("getSelections");
+                    if (rows.length != 0) {
+                        var params = [];
+                        $.each(rows, function (i, item) {
+                            params.push("idlist=" + item.ID);
+                        });
+                        if (confirm("确定要删除选定数据么？")) {
+                            window.location.href = "@Url.Action("DeleteList")?" + params.join("&");
+                        }
+
+                    }
+                    else {
+                        alert("请选择数据");
+                    }
+                }
+            }]
+        });
+    });
+</script>
+<table class="table-model-list" id="table_list"></table>

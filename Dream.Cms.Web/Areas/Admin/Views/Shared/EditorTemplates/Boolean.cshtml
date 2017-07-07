@@ -1,0 +1,23 @@
+﻿@model object
+@using Dream.Extensions;
+@using Dream.Attributes;
+
+@{
+    var attr = Html.Attribute<SwitchAttribute>();
+}
+<div  class="switch" >
+    <input name="@Html.ViewData.ModelMetadata.PropertyName" id="@Html.ViewData.ModelMetadata.PropertyName" data-on-text="@attr.Yes" data-off-text="@attr.No" type="checkbox"  @(Model == null ? "" : (Model.ToString()=="True"?"checked":""))  value="@(Model == null ? "false" : Model.ToString())" />
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#@ViewData.ModelMetadata.PropertyName").bootstrapSwitch();
+
+        $('#@ViewData.ModelMetadata.PropertyName').on('switchChange.bootstrapSwitch', function (event, state) {
+            console.log(this); // DOM element
+            console.log(event); // jQuery event
+            console.log(state); // true | false
+            $(this).val(state);
+        });
+    })
+</script>

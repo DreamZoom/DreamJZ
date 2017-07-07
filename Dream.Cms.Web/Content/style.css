@@ -1,0 +1,171 @@
+﻿body {
+}
+.nav-big{
+    height:100px;
+    background-color:#fff;
+    position:relative;
+    margin:0px;
+}
+
+.nav-big .logo{
+    width:300px;
+}
+.nav-big .container,.nav-big .container .navbar-collapse{
+    height:100% !important;
+    position:relative;
+}
+.nav-big .nav{
+    margin-left:50px;
+   margin-top:50px;
+   transform:translateY(-50%);
+}
+.nav-big .nav a{
+    font-size:18px;
+}
+
+.centered{
+    text-align:center
+}
+
+.b-box{
+
+}
+
+.b-box span{
+    display:block;
+}
+
+.b-box span.title{
+    border: 1px solid #57b101;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    display: block;
+    text-align: center;
+    line-height: 150px;
+    background: #fff;
+    margin: 0 auto;
+    font-size: 60px;
+    color: #57b101;
+    font-weight: bold;
+}
+.b-box span.sub-title{
+    font-size: 1.2em;
+    color: #57B101;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.b-box span.desc{
+        color: #666;
+    line-height: 180%;
+    font-size: 1em;
+    text-align: center;
+}
+
+.footer{
+    height:80px;background-color: #747474;
+}
+
+.footer h4{
+    text-align:center;
+    color:#fff;
+    font-size:14px;
+}
+
+.p-18,.p-18 p{
+    font-size: 18px;
+}
+
+.p-line p{
+    border-bottom:dotted 1px #ccc
+}
+
+.b-iframe{
+    width:100%;
+    height:300px;
+}
+
+
+.login-form{
+    max-width:300px;
+    padding:20px;
+    box-shadow: 0px 0px 10px #999;
+    margin:30px;
+    background-color:#fff;
+}
+
+.login-form input{
+    width:100%;
+    border: 1px solid #e9e9e9;
+    padding:10px;
+}
+
+.login-bg{
+    position:relative;
+}
+
+.login-bg .login-form{
+    position:absolute;
+    right:30px;
+    top:10px;
+
+}
+
+body{
+    background-color:#f8f8f8;
+}
+.container{
+    width:70%;
+}
+.navbar-brand.logo{
+    padding:0px;
+}
+.navbar-brand.logo img{
+    height:100%;
+    background:rgba(0,0,0,0)
+}
+.line{
+    border-bottom:solid 1px #ccc;
+    margin:10px 0px;
+}
+.main-body {
+    min-height:80%;
+}
+.media-info{
+    font-size:14px;
+    margin-top:10px;
+}
+.job-list{
+    padding:10px;
+    border-bottom:1px solid #eee;
+    position:relative
+}
+
+.job-list .media-heading{
+    color:#055780;
+    font-weight:bold;
+}
+
+.media-info span{
+    margin-right:20px;
+}
+
+.media-actions{
+    /*position:absolute;
+    top:50%;
+    right:10px;
+    transform:translateY(-50%);*/
+}
+
+.media-body .btn{
+    margin:10px;
+    margin-left:0;
+}
+
+.job-search{
+    padding:10px;
+    background-color:#fff;
+}

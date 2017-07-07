@@ -1,0 +1,116 @@
+﻿html,
+body {
+    background: #f8f8f8;
+    font-size: 16px;
+}
+
+a:hover, a:visited {
+    text-decoration: none;
+}
+
+* {
+    transition: all 1s;
+}
+
+.container {
+    max-width: 760px;
+}
+
+.article-list {
+    padding: 10px 0;
+    /*background: #fff;
+    box-shadow: 0px 0px 4px #888;*/
+}
+
+    .article-list .article-item {
+        padding: 10px 0;
+        border-bottom: dotted 1px #ccc;
+    }
+
+        .article-list .article-item .article-item-title {
+            font-size: 46px;
+            color: #333;
+        }
+
+            .article-list .article-item .article-item-title:hover {
+                color: #333;
+            }
+
+            .article-list .article-item .article-item-title a {
+                text-decoration: none;
+                color: #333;
+            }
+
+                .article-list .article-item .article-item-title a:hover {
+                    text-decoration: none;
+                    color: #333;
+                }
+
+        .article-list .article-item .article-item-info {
+            font-size: 14px;
+            color: #888;
+            padding: 10px 0px;
+        }
+
+            .article-list .article-item .article-item-info span {
+                padding-right: 10px;
+            }
+
+        .article-list .article-item .article-item-summary {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            font-family: "Noto Serif",serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .article-list .article-item .article-item-actions {
+            padding: 20px 0;
+        }
+
+.article {
+    padding: 10px 0;
+    /*background: #fff;
+    box-shadow: 0 0 4px #ddd;*/
+    min-height: 400px;
+}
+
+    .article .article-title {
+        font-size: 46px;
+        color: #333;
+        font-weight: bold;
+        padding: 10px 0px;
+    }
+
+    .article .article-info {
+        font-size: 14px;
+        color: #888;
+    }
+
+        .article .article-info span {
+            padding-right: 10px;
+        }
+
+    .article .article-body {
+        font-family: "Noto Serif",serif;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.7;
+        padding: 10px 0px;
+    }
+
+        .article .article-body .article-surface {
+            padding: 10px;
+        }
+
+            .article .article-body .article-surface img {
+                max-width: 100px;
+            }
+
+.article-item-surface {
+    padding-top: 40px;
+}

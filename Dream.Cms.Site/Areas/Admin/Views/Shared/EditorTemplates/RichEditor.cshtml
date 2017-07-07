@@ -1,0 +1,10 @@
+﻿<textarea id="@Html.ViewData.ModelMetadata.PropertyName" name="@Html.ViewData.ModelMetadata.PropertyName" style="width:90%">@Model</textarea>
+<script type="text/javascript">
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#@Html.ViewData.ModelMetadata.PropertyName', {
+            uploadJson: '/ashx/upload_json.ashx',
+        
+            allowFileManager: false
+        });
+    });
+</script>

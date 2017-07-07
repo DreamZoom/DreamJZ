@@ -1,0 +1,203 @@
+﻿@using Dream.Extensions;
+@using Dream.Attributes;
+
+@{
+    var attr = Html.Attribute<TreeSelectAttribute>();
+}
+
+<input type="text" name="text_@ViewData.ModelMetadata.PropertyName" class="text-box" value="@Model" readonly="readonly" id="text_@ViewData.ModelMetadata.PropertyName" />
+<input type="hidden" name="@ViewData.ModelMetadata.PropertyName" value="@Model" id="@ViewData.ModelMetadata.PropertyName" />
+<a id="btn_open_dialog_@ViewData.ModelMetadata.PropertyName" class="btn green">选择</a>
+
+<style type="text/css">
+    .datagrid.easyui-fluid {
+        width: 100% !important;
+    }
+</style>
+
+
+
+<!--选择对话框-->
+<div id="dialog_@ViewData.ModelMetadata.PropertyName" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">@attr.Title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <table class="easyui-datagrid" id="table_@ViewData.ModelMetadata.PropertyName" style="width:100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark">取消</button>
+                <button type="button" class="btn green" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--选择对话框-->
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $("#btn_open_dialog_@ViewData.ModelMetadata.PropertyName").bind("click", function () {
+
+            //去除重复数据
+            function unique(a) {
+                var hash = {},
+                    len = a.length,
+                    result = [];
+
+                for (var i = 0; i < len; i++) {
+                    if (!hash[a[i]]) {
+                        hash[a[i]] = true;
+                        result.push(a[i]);
+                    }
+                }
+                return result;
+            }
+
+            Array.prototype.indexOf = function (val) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i] == val) return i;
+                }
+                return -1;
+            };
+
+            Array.prototype.remove = function (val) {
+                var index = this.indexOf(val);
+                if (index > -1) {
+                    this.splice(index, 1);
+                }
+            };
+
+
+            function CheckRows(rows) {
+                var names = $("#text_@ViewData.ModelMetadata.PropertyName").val().split(",");
+                var values = $("#@ViewData.ModelMetadata.PropertyName").val().split(",");
+                if ($("#@ViewData.ModelMetadata.PropertyName").val() == "") values = [];
+                if ($("#text_@ViewData.ModelMetadata.PropertyName").val() == "") names = [];
+
+
+                for (var i = 0; i < rows.length; i++) {
+                    var value = rows[i]["@attr.Key"];
+                    values.push(value.toString());
+
+                    var name = rows[i]["@attr.Name"];
+                    names.push(name.toString());
+                }
+                values = unique(values);
+                names = unique(names);
+                console.log(values);
+                $("#@ViewData.ModelMetadata.PropertyName").val(values.join(","));
+                $("#text_@ViewData.ModelMetadata.PropertyName").val(names.join(","))
+            }
+
+            function UnCheckRows(rows) {
+                var names = $("#text_@ViewData.ModelMetadata.PropertyName").val().split(",");
+                var values = $("#@ViewData.ModelMetadata.PropertyName").val().split(",");
+                if ($("#@ViewData.ModelMetadata.PropertyName").val() == "") values = [];
+                if ($("#text_@ViewData.ModelMetadata.PropertyName").val() == "") names = [];
+                for (var i = 0; i < rows.length; i++) {
+                    var value = rows[i]["@attr.Key"];
+                    values.remove(value.toString());
+
+                    var name = rows[i]["@attr.Name"];
+                    names.remove(name.toString());
+                }
+                values = unique(values);
+                names = unique(names);
+                console.log(values);
+                $("#@ViewData.ModelMetadata.PropertyName").val(values.join(","));
+                $("#text_@ViewData.ModelMetadata.PropertyName").val(names.join(","))
+            }
+
+            var Columns = "@attr.Columns";
+            var ColumnNames = "@attr.ColumnNames";
+
+            var singleSelectMode = "@attr.SelectMode" == 1;
+
+            var fileds = new Array();
+
+            fileds.push({ field: "ck", title: "全选", checkbox: true, width: 100 });
+            fileds.push({ field: "@attr.Key", title: "@attr.KeyTitle", width: 100 });
+            fileds.push({ field: "@attr.Name", title: "@attr.NameTitle", width: 100 });
+
+            var columnList = Columns.split(",");
+            var columnNameList = ColumnNames.split(",");
+
+            for (var i = 0; i < columnList.length; i++) {
+                fileds.push({ field: columnList[i], title: columnNameList[i] || columnList[i], width: 100 });
+            }
+
+            $("#dialog_@ViewData.ModelMetadata.PropertyName").on('shown.bs.modal', function (e) {
+                // do something...
+                $('#table_@ViewData.ModelMetadata.PropertyName').treegrid({
+                    url: '@Url.Action("JsonPageList", @attr.ControllerName)',
+                    columns: [fileds],
+                    treeField: '@attr.Name',
+                    singleSelect: singleSelectMode,
+                    width: "100%",
+                    onLoadSuccess: function () {
+                        var rows = $('#table_@ViewData.ModelMetadata.PropertyName').datagrid("getRows");
+                        var values = $("#@ViewData.ModelMetadata.PropertyName").val().split(",");
+                        for (var i = 0; i < rows.length; i++) {
+                            if (values.indexOf(rows[i]["@attr.Key"].toString()) > -1) {
+                                //checkRow
+                                $('#table_@ViewData.ModelMetadata.PropertyName').datagrid("checkRow", i);
+                            }
+                        }
+
+                    },
+                    onCheck: function (index, row) {
+
+                        if (singleSelectMode) {
+                            var value = row["@attr.Key"];
+                            $("#@ViewData.ModelMetadata.PropertyName").val(value);
+                            $("#text_@ViewData.ModelMetadata.PropertyName").val(row["@attr.Name"]);
+                        }
+                        else {
+                            CheckRows([row]);
+                        }
+
+                    },
+                    onUncheck: function (index, row) {
+                        if (singleSelectMode) {
+                            //不处理
+                        }
+                        else {
+                            UnCheckRows([row]);
+                        }
+                    },
+                    onCheckAll: function (rows) {
+                        CheckRows(rows);
+                    },
+                    onUncheckAll: function (rows) {
+                        UnCheckRows(rows);
+                    }
+
+                });
+            })
+
+
+
+
+            $("#dialog_@ViewData.ModelMetadata.PropertyName").modal("show");
+
+
+
+
+
+        });
+
+
+    });
+</script>

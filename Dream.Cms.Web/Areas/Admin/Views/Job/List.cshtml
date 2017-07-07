@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "列表";
+    Layout = "~/Areas/Admin/Views/Shared/FrameLayout.cshtml";
+    var propertys = Html.Metadata();
+    List<string> fields = new List<string>();
+    foreach (var property in propertys)
+    {
+        if (property.ListMode == Dream.ShowMode.Hidden || property.ListMode == Dream.ShowMode.Hidden){ continue;}
+        fields.Add("{" + string.Format("field:\"{0}\", title:\"{1}\"", property.PropertyName, property.DisplayName) + "}");
+
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#table_list').datagrid({
+            url: '@Url.Action("PageList")',
+            pagination: true,
+            columns: [[
+                { field: 'checked', checkbox: true },
+                @Html.Raw(string.Join(",",fields)),
+                {
+                    field: "action",
+                    title: "操作",
+                    formatter: function (value, row, index) {
+                        return '<a href="@Url.Action("List", "JobRecord")?jobid=' + row.ID + '">查看报名记录</a>';
+                    }
+                }
+            ]],
+            toolbar: [{
+                iconCls: 'icon-add',
+                text: "添加",
+                handler: function () {
+                    window.location.href = "@Url.Action("Create")";
+                }
+            }, '-', {
+                iconCls: 'icon-edit',
+                text: "编辑",
+                handler: function () {
+                    var row = $('#table_list').datagrid("getSelected");
+                    if (row) {
+                        window.location.href = "@Url.Action("Edit")?id="+row.ID;
+                    }
+                    else {
+                        alert("请选择数据");
+                    }
+                }
+            }, '-', {
+                iconCls: 'icon-remove',
+                text: "删除",
+                handler: function () {
+                    var rows = $('#table_list').datagrid("getSelections");
+                    if (rows.length != 0) {
+                        var params = [];
+                        $.each(rows, function (i, item) {
+                            params.push("idlist=" + item.ID);
+                        });
+                        if (confirm("确定要删除选定数据么？")) {
+                            window.location.href = "@Url.Action("DeleteList")?" + params.join("&");
+                        }
+                        
+                    }
+                    else {
+                        alert("请选择数据");
+                    }
+                }
+            }]
+        });
+    });
+</script>
+<table class="table-model-list" id="table_list"></table>

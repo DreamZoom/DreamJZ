@@ -1,0 +1,15 @@
+﻿header+div{
+    margin-top:60px;
+}
+
+.article-list .media-object{
+    max-width:100px;
+}
+
+.media-content{
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+}

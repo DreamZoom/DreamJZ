@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Dream.Cms.Article>
+
+@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<ul class="media-list article-list">
+    @foreach (var item in Model)
+    {
+        <li class="media article-item">
+
+            <div class="media-body">
+                <h4 class="media-heading article-item-title">
+                    <a href="@Url.Action("Details", "Home", new { Id=item.ID})">@item.Name </a>
+                </h4>
+                <div class="article-item-info">
+                    <span class="info-date"><i class="fa fa-clock-o"></i> @item.CreateTime</span>
+                    <span class="info-visit">阅读(@item.Visits)</span>
+                </div>
+                <div class="article-item-summary">
+                    @Html.ShowText(item.ContentBody)
+                </div>
+                <div class="article-item-actions">
+                    <a href="@Url.Action("Details", "Home", new { Id=item.ID})">阅读全文...</a>
+                </div>
+            </div>
+            @*@if (!string.IsNullOrWhiteSpace(item.Surface))
+{
+    <div class="media-right article-item-surface">
+        <a href="@Url.Action("Details", "Home", new { Id=item.ID})">
+            <img class="media-object" src="@item.Surface" alt="@item.Name">
+        </a>
+    </div>
+}*@
+
+        </li>
+    }
+</ul>

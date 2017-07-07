@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "奥斯美网站";
+    Layout = "~/Areas/Admin/Views/Shared/FrameLayout.cshtml";
+}
+
+<script>
+    $(function () {
+        $.ajax({
+            url: "@Url.Action("JsonPageList","User")",
+            dataType: "json",
+            success: function (res) {
+
+                $("#member").html(res.total);
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("GetJobing", "Job")",
+            dataType: "json",
+            success: function (res) {
+                $("#jobconut").html(res.count);
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("JsonPageList","JobTag")",
+            dataType: "json",
+            success: function (res) {
+
+                $("#jobtagconut").html(res.total);
+            }
+        });
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var series = [];
+
+        var option = {
+            title: {
+                show: false,
+                text: '最近会员报名趋势'
+            },
+            tooltip: {
+                show: true,
+                formatter: function (params) {
+                    var date = params.name;
+                    return params.seriesName +":"+date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' | ' + params.value[1];
+                },
+            },
+            legend:{
+                show: true,
+                data: ["每日报名数量", "新增会员数量"]
+            },
+            xAxis: {
+                name: "时间",
+                type: 'time',
+            },
+            yAxis: [ {
+                name: "数量",
+                type: 'value',
+            }],
+            series: [{
+                name: '每日报名数量',
+                type: 'line',             
+                data: []
+            }, {
+                name: '新增会员数量',
+                type: 'line',              
+                data: []
+            }]
+        };
+        myChart.setOption(option);
+
+        $.ajax({
+            url: "@Url.Action("getRecordsByDay", "JobRecord")",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var data = res;
+                // 指定图表的配置项和数据
+
+
+                var option = myChart.getOption();
+                option.series[0].data = data.map(function (item) {
+                    var time = new Date(item.name);
+                    return { name: time, value: [[time.getFullYear(), time.getMonth() + 1, time.getDate()].join('/'), item.count] };
+                });
+                myChart.setOption(option);
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("getUsersByDay", "User")",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+
+                var data = res;              
+                var option = myChart.getOption();
+                option.series[1].data = data.map(function (item) {
+                    var time = new Date(item.name);
+                    return { name: time, value: [[time.getFullYear(), time.getMonth() + 1, time.getDate()].join('/'), item.count] };
+                });
+                myChart.setOption(option);
+
+            }
+        });
+    });
+</script>
+<div class="row">
+    <div class=" col-md-3 ">
+        <div>
+            <div class="dashboard-stat blue-madison">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number" id="member">
+                        0
+                    </div>
+                    <div class="desc">
+                        会员数
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-stat red-intense">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number" id="jobconut">
+                        0
+                    </div>
+                    <div class="desc">
+                        招聘中兼职总数
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-stat green-haze">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number" id="jobtagconut">
+                        0
+                    </div>
+                    <div class="desc">
+                        兼职类型
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class=" col-md-9 ">
+        <h4 style="text-align:center">最近会员报名趋势</h4>
+        <div id="main" style="width: 100%;height:300px;"></div>
+    </div>
+
+
+</div>

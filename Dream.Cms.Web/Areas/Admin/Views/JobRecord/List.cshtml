@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "列表";
+    Layout = "~/Areas/Admin/Views/Shared/FrameLayout.cshtml";
+    var propertys = Html.Metadata();
+    List<string> fields = new List<string>();
+    foreach (var property in propertys)
+    {
+        if (property.ListMode == Dream.ShowMode.Hidden || property.ListMode == Dream.ShowMode.Hidden) { continue; }
+        fields.Add("{" + string.Format("field:\"{0}\", title:\"{1}\"", property.PropertyName, property.DisplayName) + "}");
+
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#table_list').datagrid({
+            url: '@Url.Action("PageList")?jobid=@Request.Params["jobid"]&userid=@Request.Params["userid"]',
+            pagination: true,
+            columns: [[
+                { field: 'checked', checkbox: true },
+                @Html.Raw(string.Join(",",fields))
+            ]],
+            toolbar: []
+        });
+    });
+</script>
+<table class="table-model-list" id="table_list"></table>

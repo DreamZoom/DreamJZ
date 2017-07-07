@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<MenuConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Menus>
+    <MenuNode Name="管理首页" Descript="管理首页" IconClass="icon-home" ControllerName="Manage" ActionName="Center" ShowMode="0" Group="false" />
+    <MenuNode Name="区域管理" Descript="区域管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="区域列表" Descript="区域列表" ControllerName="Workarea" ActionName="List" />
+        <MenuNode Name="添加区域" Descript="添加区域" ControllerName="Workarea" ActionName="Create" />
+        <MenuNode Name="编辑区域" Descript="编辑区域" ControllerName="Workarea" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除区域" Descript="删除区域" ControllerName="Workarea" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="区域详情" Descript="区域详情" ControllerName="Workarea" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="职位类型管理" Descript="区域管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="职位类型列表" Descript="职位类型列表" ControllerName="JobTag" ActionName="List" />
+        <MenuNode Name="添加职位类型" Descript="添加职位类型" ControllerName="JobTag" ActionName="Create" />
+        <MenuNode Name="编辑职位类型" Descript="编辑职位类型" ControllerName="JobTag" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除职位类型" Descript="删除职位类型" ControllerName="JobTag" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="职位类型详情" Descript="职位类型详情" ControllerName="JobTag" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="职位管理" Descript="区域管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="职位列表" Descript="职位列表" ControllerName="Job" ActionName="List" />
+        <MenuNode Name="添加职位" Descript="添加职位" ControllerName="Job" ActionName="Create" />
+        <MenuNode Name="编辑职位" Descript="编辑职位" ControllerName="Job" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除职位" Descript="删除职位" ControllerName="Job" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="职位详情" Descript="职位详情" ControllerName="Job" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="报名管理" Descript="区域管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="报名记录" Descript="职位列表" ControllerName="JobRecord" ActionName="List" />   
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="会员管理" Descript="会员管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="会员列表" Descript="会员列表" ControllerName="User" ActionName="List" />
+        <MenuNode Name="添加会员" Descript="添加会员" ControllerName="User" ActionName="Create" />
+        <MenuNode Name="编辑会员" Descript="编辑会员" ControllerName="User" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除会员" Descript="删除会员" ControllerName="User" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="会员详情" Descript="会员详情" ControllerName="User" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="管理员管理" Descript="管理员管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="管理员列表" Descript="管理员列表" ControllerName="Manager" ActionName="List" />
+        <MenuNode Name="添加管理员" Descript="添加管理员" ControllerName="Manager" ActionName="Create" />
+        <MenuNode Name="编辑管理员" Descript="编辑管理员" ControllerName="Manager" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除管理员" Descript="删除管理员" ControllerName="Manager" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="管理员详情" Descript="管理员详情" ControllerName="Manager" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="角色管理" Descript="角色管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="角色列表" Descript="角色列表" ControllerName="Role" ActionName="List" />
+        <MenuNode Name="添加角色" Descript="添加角色" ControllerName="Role" ActionName="Create" />
+        <MenuNode Name="编辑角色" Descript="编辑角色" ControllerName="Role" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除角色" Descript="删除角色" ControllerName="Role" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="角色详情" Descript="角色详情" ControllerName="Role" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    
+   
+  </Menus>
+</MenuConfig>

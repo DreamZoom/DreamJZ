@@ -1,0 +1,6 @@
+﻿@model object
+@{
+    var list = Html.EnumListBox(Html.ViewData.ModelMetadata.ModelType,Model);
+}
+
+@Html.DropDownList("", list)

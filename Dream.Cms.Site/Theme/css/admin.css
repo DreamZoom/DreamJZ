@@ -1,0 +1,21 @@
+﻿body {
+}
+
+.navbar-fixed-top + * {
+    margin-top: 60px;
+}
+
+.login-form, .change-password-from {
+    padding: 20px;
+    margin: auto;
+}
+
+.page-sidebar {
+    width: 180px;
+    position: fixed;
+    top: 50px;
+    bottom: 0px;
+    background-color: #293038;
+    z-index: 102;
+    overflow-x: hidden;
+}

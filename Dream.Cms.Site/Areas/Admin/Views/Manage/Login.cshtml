@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_Frame.cshtml";
+}
+
+<div class="form-horizontal login-form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="form-body">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="password">用户名</label>
+
+                <div class="col-sm-10">
+                    <div>
+                        @Html.TextBox("username")
+
+                    </div>
+                    <span class="help-block">@Html.ValidationMessage("username")</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="password">密码</label>
+
+                <div class="col-sm-10">
+                    <div>
+                        @Html.Password("password")
+
+                    </div>
+
+                    <span class="help-block">@Html.ValidationMessage("password")</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="password"></label>
+
+                <div class="col-sm-10">
+                    <div>
+                        <input type="submit" value="登录" class="btn btn-primary " />
+
+                    </div>
+
+                    
+                </div>
+            </div>
+
+        </div>
+     
+
+    }
+</div>

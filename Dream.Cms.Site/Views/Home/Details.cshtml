@@ -1,0 +1,25 @@
+﻿@model Dream.Cms.Article
+
+@{
+    ViewBag.Title = Html.ValueFor(m => m.Name);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="article">
+    <div class="article-title">@Html.ValueFor(m => m.Name)</div>
+    <div class="article-info">
+        <span class="info-date"><i class="fa fa-clock-o"></i> @Html.ValueFor(m => m.CreateTime)</span>
+        <span class="info-visit">阅读(@Html.ValueFor(m => m.Visits))</span>
+        <span class="info-cate">分类(@Html.ValueFor(m => m.Category))</span>
+    </div>
+    <div class="article-body">
+        @if (!string.IsNullOrWhiteSpace(Model.Surface))
+        {
+            <div class="article-surface">
+                <img class="media-object" src="@Html.ValueFor(m => m.Surface)" alt="@Html.ValueFor(m => m.Name)">            
+            </div>
+        }
+        
+        @Html.Raw(Model.ContentBody)
+    </div>
+</div>
