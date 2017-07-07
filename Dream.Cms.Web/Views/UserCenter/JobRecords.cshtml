@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Dream.Jobs.Models.JobRecord>
+@{
+    ViewBag.Title = "报名记录";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h4>报名记录</h4>
+<div class="line"></div>
+<div class="record-list">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>职位</th>
+                <th>联系方式</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class=" min-200">@item.JobTitle</td>
+                    <td class="">@item.Job.CompanyTell </td>
+                    <td class="">
+                        @if (item.IsCancel)
+                        {
+                            <span>已取消</span>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("JobCancel", new { Id=item.ID})" class="btn btn-info">取消报名</a>
+                        }
+                        
+                    </td>               
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="pager">
+    @Html.MvcPager(Model)
+</div>

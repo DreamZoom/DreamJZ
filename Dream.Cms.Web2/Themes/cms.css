@@ -1,0 +1,43 @@
+﻿body {
+}
+.navbar-fixed-top + .container{
+    margin-top:60px;
+}
+.width-960{
+    width:960px;
+}
+
+.article{
+    margin-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #dcdcdc;
+    overflow-x: hidden;
+}
+
+.article .title{
+    font-weight: bold;
+    color: #313233;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+.article .info{
+    font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+    color: #4c4c4e;
+    font-size: 0.75em;
+}
+.article .info .date{
+
+}
+.article .info .category{
+
+}
+
+.article .article-body{
+        z-index: 21;
+    padding-top: 10px;
+    position: relative;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+    color: #4c4c4e;
+    font-size: 14px;
+    margin-bottom: 14px;
+}

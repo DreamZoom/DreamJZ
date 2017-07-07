@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<MenuConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Menus>
+    <MenuNode Name="管理首页" Descript="管理首页" ControllerName="Home" ActionName="Index" ShowMode="0" Group="false" />
+
+    <MenuNode Name="频道管理" Descript="频道管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="频道列表" Descript="频道列表" ControllerName="Channel" ActionName="List" />
+        <MenuNode Name="添加频道" Descript="添加频道" ControllerName="Channel" ActionName="Create" />
+        <MenuNode Name="编辑频道" Descript="编辑频道" ControllerName="Channel" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除频道" Descript="删除频道" ControllerName="Channel" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="频道详情" Descript="频道详情" ControllerName="Channel" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+   
+    <MenuNode Name="内容管理" Descript="内容管理"  Group="true" >
+      <Menus>
+        <MenuNode Name="内容列表" Descript="内容列表" ControllerName="Article" ActionName="List" />
+        <MenuNode Name="添加内容" Descript="添加内容" ControllerName="Article" ActionName="Create" />
+        <MenuNode Name="编辑内容" Descript="编辑内容" ControllerName="Article" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除内容" Descript="删除内容" ControllerName="Article" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="内容详情" Descript="内容详情" ControllerName="Article" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="友情链接" Descript="友情链接"  Group="true" >
+      <Menus>
+        <MenuNode Name="友情链接列表" Descript="友情链接列表" ControllerName="FriendLink" ActionName="List" />
+        <MenuNode Name="添加友情链接" Descript="添加友情链接" ControllerName="FriendLink" ActionName="Create" />
+        <MenuNode Name="编辑友情链接" Descript="编辑友情链接" ControllerName="FriendLink" ActionName="Edit"    ShowMode="2" />
+        <MenuNode Name="删除友情链接" Descript="删除友情链接" ControllerName="FriendLink" ActionName="Delete"  ShowMode="2" />
+        <MenuNode Name="友情链接详情" Descript="友情链接详情" ControllerName="FriendLink" ActionName="Details" ShowMode="2" />
+      </Menus>
+    </MenuNode>
+    <MenuNode Name="系统设置" Descript="系统设置"  Group="true" >
+      <Menus>
+        <MenuNode Name="站点设置" Descript="站点设置" ControllerName="SiteConfig" ActionName="Config"  />
+        <MenuNode Name="首页导航" Descript="首页导航" ControllerName="NavigationConfig" ActionName="Index"  />
+      </Menus>
+    </MenuNode>
+   
+  </Menus>
+</MenuConfig>

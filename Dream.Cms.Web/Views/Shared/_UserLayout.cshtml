@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "用户中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var actionName = ViewContext.Controller.ControllerContext.RouteData.Values["action"];
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<div class="user-container">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-2">
+                <div class="user-navs">
+                    <a data-action="info" href="@Url.Action("Info")"><i class="fa fa-user"></i>我的信息</a>
+                    <a data-action="jobrecords" href="@Url.Action("JobRecords")"><i class="fa fa-bars"></i>报名记录</a>
+                    <a data-action="changepassword" href="@Url.Action("changepassword")"><i class=" fa fa-lock"></i>账户管理</a>
+                    <a data-action="loginout" href="@Url.Action("LoginOut")"><i class="fa fa-sign-out"></i>注销登录</a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div style="background-color:#fff;padding:10px" class="user-main">
+                    @RenderBody()
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+   
+</div>
+
+<script>
+    $(function () {
+        $(".user-navs a").removeClass("active");
+        $(".user-navs a[data-action=@actionName.ToString().ToLower()]").addClass("active");
+    })
+</script>

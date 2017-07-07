@@ -1,0 +1,122 @@
+﻿body {
+}
+
+.container {
+}
+
+.navbar-default {
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.main-body {
+    margin-top: 50px;
+}
+
+.navbar-default .navbar-brand {
+    height: 50px;
+    line-height: 20px;
+    padding: 0px;
+    margin-left: 20px;
+}
+
+    .navbar-default .navbar-brand img {
+        height: 80%;
+        display: inline;
+    }
+
+.navbar-default .navbar-nav > li > a {
+}
+
+.index-info .title {
+    position:absolute;
+    right:50%;
+    font-family: "Microsoft YaHei" ;
+    color: #fe3c3c;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.navbar-default .navbar-nav li:hover > a {
+    background-color: transparent;
+    color: #5bc0de;
+}
+
+@media (min-width: 768px) {
+    .navbar-default .navbar-nav > li > a {
+        font-size: 20px;
+        height: 80px;
+        line-height: 50px;
+    }
+
+    .navbar-default .navbar-nav > .active > a {
+        background-color: transparent;
+        color: #5bc0de;
+    }
+
+    .navbar-default .navbar-brand {
+        height: 80px;
+        line-height: 80px;
+        padding: 0px;
+    }
+
+    .main-body {
+        margin-top: 80px;
+    }
+
+    .sec-title {
+        padding-top: 80px;
+    }
+}
+
+@media(max-width:768px) {
+    .bottom-footer {
+        font-size: 14px;
+    }
+
+    .index-info .title {
+        padding-left: 10px;
+    }
+
+        .index-info .title h1 {
+            font-size: 20px;
+            padding: 10px;
+        }
+
+    .login-form {
+        max-width: 600px;
+        float: none;
+    }
+
+    .login-box {
+        position: relative;
+    }
+
+    .sec-title {
+        margin-bottom: 10px;
+    }
+
+    .b-box span.title {
+        border: 1px solid #57b101;
+        border-radius: 100%;
+        -moz-border-radius: 100%;
+        -webkit-border-radius: 100px;
+        width: 130px;
+        height: 130px;
+       
+        line-height: 130px;
+      
+        font-size: 50px;
+        
+    }
+}
+
+@media(max-width:1008px) and (min-width: 768px) {
+    .index-info .title {
+    }
+
+        .index-info .title h1 {
+            font-size: 30px;
+            padding: 10px;
+        }
+}

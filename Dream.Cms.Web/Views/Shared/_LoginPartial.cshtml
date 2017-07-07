@@ -1,0 +1,19 @@
+﻿@using Dream.SSO;
+@if (SSOProviders.Current.IsLogin())
+{
+    <li >
+        <a href="@Url.Action("Info", "UserCenter")"><i class="fa fa-user-circle"></i>个人中心@*@SSOProviders.Current.GetUser().UserName*@</a>
+       
+        @*@Html.ActionLink(SSOProviders.Current.GetUser().UserName, "Info", "UserCenter", routeValues: null, htmlAttributes: new { @class = "username", title = "管理" })*@
+
+        @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+        }*@
+    </li>
+}
+else
+{
+    <li ><a href="@Url.Action("SignIn", "UserCenter")"><i class="fa fa-user-circle"></i>登录</a></li>
+}

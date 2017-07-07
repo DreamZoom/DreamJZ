@@ -1,0 +1,198 @@
+﻿@model Dream.Jobs.Models.Job
+
+@{
+    ViewBag.Title = "职位详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@helper showState(Dream.Jobs.Models.Job job)
+{
+    <div class="media-actions" style="text-align:left">
+        @if (!job.IsOver())
+        {
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">立即报名</button>
+        }
+        else
+        {
+            <a href="#" class="btn btn-success">报名结束</a>
+        }
+       
+    </div>
+}
+
+<section class="about-section" style="background-color: #f1f3f8">
+    <div class="container">
+        <div class="row clearfix">
+            <ol class="breadcrumb white-bg ">
+                <li><a href="@Url.Action("Index")">找兼职</a></li>
+                <li class="active">@Html.DisplayFor(model => model.JobName)</li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+
+            <div class="col-md-12 job-details">
+                <div class="row white-bg padding-15">
+                    <div class="col-md-8">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="@Url.Action("details", new { Id=Model.ID })">
+                                    @if (string.IsNullOrWhiteSpace(Model.JobLogo))
+                                    {
+                                        <img class="media-object" src="~/images/logo-300.png" style="width:84px;height:84px" />
+                                    }
+                                    else
+                                    {
+                                        <img class="media-object" src="@Model.JobLogo" style="width:84px;height:84px" />
+                                    }
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h2 class="media-heading" style="color:red;padding-top:5px">@Html.DisplayFor(model => model.JobName)</h2>
+
+                                <div class="media-info" style="padding-top:20px;">
+                                    <span class="label" style="padding:0px;color:#ccc;margin-top:20px;">
+                                        发布时间:  @Html.DisplayFor(model => model.CreateTime)
+                                    </span>
+                                    <span class="label" style="padding:0px;color:#ccc;margin-top:20px;">
+                                        结束时间:  @Html.DisplayFor(model => model.EndTime)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 padding-top-15">
+                        @showState(Model)
+                    </div>
+                </div>
+
+                <div class="row white-bg padding-15 margin-top">
+                    <div class="media col-md-12">
+                        <div class="media-body">
+                            <h4>基本信息</h4>
+
+                            <div class="media-info row">
+                                <div class="col-xs-12 col-sm-4"><span class="label">招聘公司：</span>@Html.DisplayFor(model => model.Company)</div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">兼职类型：</span>@Html.DisplayFor(model => model.Tag.TagName)</div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">招聘人数：</span>@Html.DisplayFor(model => model.NeedPeopleCount)</div>
+                            </div>
+                            <div class="media-info row">
+                                <div class="col-xs-12 col-sm-4"><span class="label">年龄：</span>@Html.DisplayFor(model => model.RequireAge)</div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">性别：</span>@Html.DisplayFor(model => model.RequireSex)</div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">健康证：</span>@(Model.RequireHealth ? "需要" : "不需要")</div>
+                            </div>
+                            <div class="media-info row">
+                                <div class="col-xs-12 col-sm-4"><span class="label">待遇：</span><span style="color:red">@Html.DisplayFor(model => model.Salary)</span></div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">工作时间：</span>@Model.WorkTime</div>
+                                <div class="col-xs-12 col-sm-4"><span class="label">工作区域：</span>@Model.WorkareaNames()</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row white-bg padding-15 margin-top">
+                    <div class="media col-md-12">
+                        <div class="media-body">
+                            <h4>职位描述</h4>
+
+                            <div class="media-info">
+                                @Html.Raw(Model.JobDescription)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row white-bg padding-15 margin-top">
+                    <div class="media col-md-12">
+                        <div class="media-body">
+                            <h4>职位要求</h4>
+
+                            <div class="media-info">
+                                @Html.Raw(Model.JobRequire)
+                                <p>联系方式 : 报名成功后即可查看，也可在个人中心报名记录查看。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="row white-bg padding-15 margin-top" style="margin-bottom:20px">
+                    <div class="media col-md-12">
+                        <div class="media-body">
+                            <h4>其他备注</h4>
+
+                            <div class="media-info">
+                                @Html.Raw(Model.JobRemark)
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="row white-bg padding-15 margin-top" style="margin-bottom:20px">
+                    <div class="media col-md-12">
+                        <div class="media-body">
+                            <h4>注意事项</h4>
+
+                            <div class="media-info">
+                                <p>会员必读</p>
+                                <p>1、会员报名成功后，需要立即电话联系负责人，确认工作时间地点等</p>
+                                <p>2、会员每次只能同时报名一个职位，要报名其他职位需取消原报名职位</p>
+                                <p>3、会员每天报名次数、取消次数各只有3次</p>
+                                <p>4、有任何问题请进行电话咨询；咨询时间在9:00-18:00；短信咨询不予以回复</p>
+                                <p>5、退订工作请在报名截止时间前6个小时，（进入个人中心，报名记录）退订</p>
+                                <p>6、成功预定工作后，请准时参加，无故不到者将被停卡1个月，请同学谨慎报名</p>
+                                <p>7、工作必须是持证本人进行工作，其他人员借证使用的，或者有事让他人代替做的，一经发现，将取消会员资格</p>
+                                <p>8、本公司只负责给会员介绍工作岗位，工作期间出现任何意外均与本公司无关</p>
+                                <p>9、最终解释权归属奥斯美兼职网所有</p>
+                                <br />
+
+                                <p>温馨提示</p>
+                                <p>1、集合、面试时，请带好招聘信息中所提及的须带物品</p>
+                                <p>2、集合、面试最好早到5-10分钟，给用人单位良好的第一印象</p>
+                                <p>3、面对面试官时，不要害怕和紧张，把他当做你最好的合作伙伴和朋友，以一颗平常心，面对每一个提问</p>
+                                <p>4、全面认识自己，推销自己的优点，承认自己的不足，发挥自己的专长和兴趣，给面试官一个自信且充满魅力的你</p>
+                                <p>5、面试通过的同学，请按用人单位要求的工作时间准时上岗；未通过面试的同学不要泄气，会继续给你提供更多选择的机会。这一次的失败，是为了下一次的成功，加油！</p>
+</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">立即报名</h4>
+            </div>
+            <div class="modal-body">
+
+                <div style="background-color:#eee;padding:10px">确认工作时间和地点</div>
+                <div style="padding:10px">
+                    <p>工作时间:@Model.WorkTime</p>
+                    <p>工作区域:@Model.WorkareaNames()</p>
+                    <div>
+                        职位要求:@Html.Raw(Model.JobRequire)
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("JoinJob", "Userjob"))
+                {
+                    <input type="hidden" name="Id" value="@Model.ID" />
+
+                    <button type="submit" class="btn btn-success">预约报名</button>
+
+                }
+            </div>
+           
+        </div>
+    </div>
+</div>

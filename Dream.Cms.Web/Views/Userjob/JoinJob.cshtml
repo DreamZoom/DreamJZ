@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "报名结果";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="about-section " style="background-color: #f1f3f8">
+    <div class="container">
+        <div class="row clearfix">
+
+            <div class="col-md-12" style="min-height:400px">
+                <div class="row white-bg padding-15">
+                    <div class="col-md-12">
+                        @if (ViewBag.job != null)
+                        {
+                            <div style="text-align:center">
+                                <img src="~/images/join-result.png" />
+                            </div>
+                        }
+
+                        <h2 class="media-heading" style="color: red; text-align: center;margin-top:20px">@ViewBag.message</h2>
+                    </div>
+                   
+                    @if (ViewBag.job != null)
+                    {
+                        <div class="col-md-12">
+                            <div>
+                                <hr />
+                                <h3 style="color:red">温馨提示：</h3>
+                                <div>
+                                    <p>1、报名成功后，请立即电话联系负责人：<span style="color:red">@ViewBag.job.CompanyTell</span>确认时间地点</p>
+                                    <p>2、报名成功后，请准时按照此岗位公布集合时间及集合地点参加工作</p>
+                                    <p>3、报名成功后，如遇突发情况不能参加面试的，需提前6小时要在会员中心点击取消报名，并电话通知负责人。</p>
+                                    <p>4、报名后无故不到者，系统将自动锁定账户1个月。频繁出现将可能取消会员资格。</p>
+                                </div>
+                            </div>
+
+                            @*<h4>请立即与负责人联系:</h4>
+                            <hr />
+                            <h4 class="media-heading">兼职单位：@ViewBag.job.Company</h4>
+                            <h4 class="media-heading">联系方式：@ViewBag.job.CompanyTell</h4>*@
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

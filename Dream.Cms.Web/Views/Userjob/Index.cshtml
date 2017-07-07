@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Dream.Jobs.Models.Job>
+
+@{
+    ViewBag.Title = "职位列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var tags = ViewBag.tags as IEnumerable<Dream.Jobs.Models.JobTag>;
+    var workareas = ViewBag.workarea as IEnumerable<Dream.Jobs.Models.Workarea>;
+
+    var tagId = Request.Params["tagid"];
+    var workareaId = Request.Params["areaid"];
+}
+@helper showState(Dream.Jobs.Models.Job job)
+{
+    if (!job.IsOver())
+    {
+        <a href="@Url.Action("details", new { Id = job.ID })" class="btn btn-success">正在报名</a>
+    }
+    else
+    {
+        <a href="@Url.Action("details", new { Id = job.ID })" class="btn btn-success">报名结束</a>
+    }
+
+
+}
+<div>
+    <img src="~/images/cert.png" style="width:100%" />
+</div>
+<section class="about-section" style="background-color: #f1f3f8">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12">
+               
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12">
+
+                <div class="job-search">
+
+                    <div>
+                        <span>区域:</span>
+                        <span>
+                            <a class="@(string.IsNullOrWhiteSpace(workareaId) ? "active" : "")" href="@Url.Action("Index", new { tagId = tagId })">不限</a>
+                            @foreach (var area in workareas)
+                            {
+                                <a class="@(area.ID.ToString()==workareaId?"active":"")" href="@Url.Action("Index", new { tagId = tagId, areaid =area.ID})">@area.AreaName</a>
+                            }
+
+                        </span>
+
+                    </div>
+                    <div class="line"></div>
+                    <div>
+                        <span>类型:</span>
+                        <span>
+                            <a class="@(string.IsNullOrWhiteSpace(tagId) ? "active" : "")" href="@Url.Action("Index", new { areaid = workareaId })">不限</a>
+                            @foreach (var tag in tags)
+                            {
+                                <a class="@(tag.ID.ToString() == tagId?"active":"")" href="@Url.Action("Index", new { tagId = tag.ID, areaid = workareaId })">@tag.TagName</a>
+                            }
+
+                        </span>
+
+                    </div>
+                </div>
+
+
+                <ul class="media-list job-list">
+                    @foreach (var item in Model)
+                    {
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="@Url.Action("details", new { Id=item.ID })">
+                                    @if (string.IsNullOrWhiteSpace(item.JobLogo))
+                                    {
+                                        <img class="media-object" src="~/images/logo-300.png" style="width:84px;height:84px" />
+                                    }
+                                    else
+                                    {
+                                        <img class="media-object" src="@item.JobLogo" style="width:84px;height:84px" />
+                                    }
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <a href="@Url.Action("details", new { Id=item.ID })" style="margin-right:20px">@Html.DisplayFor(modelItem => item.JobName)</a>
+                                    @if (item.IsHot)
+                                    {
+                                        <span class="badge" style="background-color:#ff6a00">热门</span>
+                                    }
+
+                                    @if (item.IsRecommend)
+                                    {
+                                        <span class="badge" style="background-color:#0094ff">推荐</span>
+                                    }
+                                </h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row row-no-padding">
+                                            <div class="col-md-6"><span class="label">工作时间：</span><span class="value">@item.WorkTime</span></div>
+                                            <div class="col-md-6"><span class="label">兼职类型：</span><span class="value">@Html.DisplayFor(modelItem => item.Tag.TagName)</span></div>
+                                        </div>
+                                        <div class="row row-no-padding">
+                                            <div class="col-md-6"><span class="label">工作地点：</span><span class="value">@item.WorkareaNames()</span></div>
+                                            <div class="col-md-6"><span class="label">招聘人数：</span><span class="value">@Html.DisplayFor(modelItem => item.NeedPeopleCount)</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="media-info">
+                                            <span class="color-red">@Html.DisplayFor(modelItem => item.Salary)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="media-actions">
+                                            @showState(item)
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+                    }
+                </ul>
+
+                <div class="pager">
+                    @Html.MvcPager(Model)
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
